@@ -73,8 +73,8 @@ add_torch_extension(${TARGET_NAME}_cxx
   src/BookshelfWriter.cpp
   src/PyPlaceDB.cpp  
   src/PybindPlaceDB.cpp  
-  # src/PybindPyPlaceDB.cpp  
-  # src/place_io.cpp 
+  src/PybindPyPlaceDB.cpp  
+  src/place_io.cpp 
   EXTRA_INCLUDE_DIRS ${INCLUDE_DIRS}
   EXTRA_LINK_LIBRARIES ${LINK_LIBS}
   EXTRA_DEFINITIONS DRAWPLACE=${DRAWPLACE}
