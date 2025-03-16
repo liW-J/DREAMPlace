@@ -43,7 +43,7 @@ add_pytorch_extension(${TARGET_NAME}_sequential_cpp
 
 install(TARGETS 
   ${TARGET_NAME}_cpp ${TARGET_NAME}_sequential_cpp 
-  DESTINATION dreamplace/ops/${OP_NAME})
+  DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})
 
 if(TORCH_ENABLE_CUDA)
 set(CUDA_SEPARABLE_COMPILATION ON)
@@ -55,9 +55,9 @@ add_pytorch_extension(${TARGET_NAME}_cuda
   EXTRA_DEFINITIONS DRAWPLACE=${DRAWPLACE})
 install(TARGETS 
   ${TARGET_NAME}_cuda 
-  DESTINATION dreamplace/ops/${OP_NAME})
+  DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})
 set(CUDA_SEPARABLE_COMPILATION OFF)
 endif(TORCH_ENABLE_CUDA)
 
 file(GLOB INSTALL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.py)
-install(FILES ${INSTALL_SRCS} DESTINATION dreamplace/ops/${OP_NAME})
+install(FILES ${INSTALL_SRCS} DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})

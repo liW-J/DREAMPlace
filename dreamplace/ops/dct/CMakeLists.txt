@@ -28,7 +28,7 @@ add_pytorch_extension(dct2_fft2_cpp
 
 install(TARGETS 
   dct_cpp dct_lee_cpp dct2_fft2_cpp 
-  DESTINATION dreamplace/ops/${OP_NAME})
+  DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})
 
 if(TORCH_ENABLE_CUDA)
 
@@ -61,8 +61,8 @@ add_pytorch_extension(dct2_fft2_cuda
 
 install(TARGETS 
   dct_cuda dct_lee_cuda dct2_fft2_cuda 
-  DESTINATION dreamplace/ops/${OP_NAME})
+  DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})
 endif(TORCH_ENABLE_CUDA)
 
 file(GLOB INSTALL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.py)
-install(FILES ${INSTALL_SRCS} DESTINATION dreamplace/ops/${OP_NAME})
+install(FILES ${INSTALL_SRCS} DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})

@@ -36,5 +36,5 @@ add_subdirectory(gift_init)
 
 file(GLOB INSTALL_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/*.py")
 install(
-    FILES ${INSTALL_SRCS} DESTINATION dreamplace/ops
+    FILES ${INSTALL_SRCS} DESTINATION thirdparty/DREAMPlace/dreamplace/ops
     )

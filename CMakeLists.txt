@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.14)
 project(DREAMPlace LANGUAGES CXX)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set (CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH "Prefix prepended to install directories" FORCE )
-endif()
+# if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+#     set (CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install" CACHE PATH "Prefix prepended to install directories" FORCE )
+# endif()
 message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -44,7 +44,7 @@ set(CUDA_PROPAGATE_HOST_FLAGS ON)
 # it will change the RPATH when installing 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-include(cmake/TorchExtension.cmake)
+# include(cmake/TorchExtension.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -142,4 +142,4 @@ add_subdirectory(unittest)
 add_subdirectory(benchmarks)
 add_subdirectory(test)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/dreamplace/configure.py DESTINATION dreamplace)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/dreamplace/configure.py DESTINATION thirdparty/DREAMPlace/dreamplace)

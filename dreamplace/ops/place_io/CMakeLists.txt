@@ -55,6 +55,28 @@ add_pytorch_extension(${TARGET_NAME}_cpp
 
 install(TARGETS 
   ${TARGET_NAME}_cpp 
-  DESTINATION dreamplace/ops/${OP_NAME})
+  DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})
 file(GLOB INSTALL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.py)
-install(FILES ${INSTALL_SRCS} DESTINATION dreamplace/ops/${OP_NAME})
+install(FILES ${INSTALL_SRCS} DESTINATION thirdparty/DREAMPlace/dreamplace/ops/${OP_NAME})
+
+add_torch_extension(${TARGET_NAME}_cxx 
+  src/BenchMetrics.cpp  
+  src/BinMap.cpp  
+  src/Enums.cpp  
+  src/Net.cpp  
+  src/Node.cpp  
+  src/Region.cpp  
+  src/Group.cpp  
+  src/Params.cpp  
+  src/PlaceDB.cpp  
+  src/DefWriter.cpp
+  src/BookshelfWriter.cpp
+  src/PyPlaceDB.cpp  
+  src/PybindPlaceDB.cpp  
+  # src/PybindPyPlaceDB.cpp  
+  # src/place_io.cpp 
+  EXTRA_INCLUDE_DIRS ${INCLUDE_DIRS}
+  EXTRA_LINK_LIBRARIES ${LINK_LIBS}
+  EXTRA_DEFINITIONS DRAWPLACE=${DRAWPLACE}
+)
+
