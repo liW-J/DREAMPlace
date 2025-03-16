@@ -11,6 +11,6 @@ add_subdirectory(munkres-cpp)
 add_subdirectory(OpenTimer)
 
 install(
-    DIRECTORY NCTUgr.ICCAD2012 DESTINATION thirdparty
+    DIRECTORY NCTUgr.ICCAD2012 DESTINATION thirdparty/DREAMPlace/thirdparty
     )
 
