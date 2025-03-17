@@ -1,4 +1,9 @@
 {
+"txt_input" : {
+    "description" : "input .txt file", 
+    "default" : "", 
+    "required" : "iccad txt format, required for 3D placement"
+    },
 "aux_input" : {
     "description" : "input .aux file", 
     "default" : "", 
