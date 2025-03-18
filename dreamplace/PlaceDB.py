@@ -120,6 +120,9 @@ class PlaceDB (object):
 
         self.max_net_weight = None # maximum net weight in timing opt
         self.dtype = None
+        
+        # power for thermal-aware placement
+        self.node_power = None
 
     def scale_pl(self, shift_factor, scale_factor):
         """
