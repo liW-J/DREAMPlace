@@ -192,6 +192,9 @@ class PlaceDataCollection(object):
             # logging.debug(self.sorted_node_map[placedb.num_movable_nodes//2 :placedb.num_movable_nodes//2+20])
             # logging.debug(self.node_size_x[self.sorted_node_map[0: 10].long()])
             # logging.debug(self.node_size_x[self.sorted_node_map[-10:].long()])
+            
+            # self.node_power = torch.from_numpy(placedb.node_power).to(device)
+            # self.node_power = torch.load("benchmarks/iccad2022/node_power.pt")
 
     def bin_center_x_padded(self, placedb, padding, num_bins_x):
         """

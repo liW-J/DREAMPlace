@@ -28,6 +28,10 @@
     "description" : "enable gpu or not", 
     "default" : 1
     },
+"num_tiers" : {
+    "description" : "number of tiers", 
+    "default" : 2
+    },
 "num_bins_x" : {
     "description" : "number of bins in horizontal direction; computed by internal heuristic if not specified", 
     "default" : 0
