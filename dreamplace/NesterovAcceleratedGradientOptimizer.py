@@ -48,10 +48,26 @@ class NesterovAcceleratedGradientOptimizer(Optimizer):
         self.obj_and_grad_fn = obj_and_grad_fn
         self.constraint_fn = constraint_fn
         self.use_bb = use_bb
+        self._precomputed_obj_and_grad = None
 
         # I do not know how to get generator's length
         if len(self.param_groups) != 1:
             raise ValueError("Only parameters with single tensor is supported")
+
+    def set_precomputed_obj_and_grad(self, obj, grad):
+        """Reuse a gradient already evaluated by the caller in ``step_bb``.
+
+        DREAMPlace's original optimizer evaluates ``obj_and_grad_fn(v_k)``
+        inside ``step_bb``.  Some callers must evaluate it immediately before
+        ``step`` to populate ``p.grad``; without this hand-off the same very
+        large placement graph is built twice.
+        """
+        self._precomputed_obj_and_grad = (obj.detach(), grad.detach())
+
+    def _take_precomputed_obj_and_grad(self):
+        value = self._precomputed_obj_and_grad
+        self._precomputed_obj_and_grad = None
+        return value
 
     def __setstate__(self, state):
         super(NesterovAcceleratedGradientOptimizer, self).__setstate__(state)
@@ -174,6 +190,7 @@ class NesterovAcceleratedGradientOptimizer(Optimizer):
         if closure is not None:
             loss = closure()
 
+        precomputed_obj_and_grad = self._take_precomputed_obj_and_grad()
         for group in self.param_groups:
             obj_and_grad_fn = self.obj_and_grad_fn
             constraint_fn = self.constraint_fn
@@ -185,7 +202,11 @@ class NesterovAcceleratedGradientOptimizer(Optimizer):
                     group['v_k'].append(p)
                 u_k = group['u_k'][i]
                 v_k = group['v_k'][i]
-                obj_k, g_k = obj_and_grad_fn(v_k)
+                if precomputed_obj_and_grad is None:
+                    obj_k, g_k = obj_and_grad_fn(v_k)
+                else:
+                    obj_k, g_k = precomputed_obj_and_grad
+                    precomputed_obj_and_grad = None
                 if not group['obj_k']:
                     group['obj_k'].append(None)
                 group['obj_k'][i] = obj_k.data.clone()
